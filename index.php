@@ -15,18 +15,30 @@
             <div class="campo">
                 <label for="year">Year:</label>
                 <select name="year" id="year">
-                    <option value="1">2010</option>
-                    <option value="2">2009</option>
+                    
+                <?php $filtros = obtenerYear();
+
+                if($filtros->num_rows) {
+                    foreach($filtros as $filtro) {?>
+                    <option value="<?php echo $filtro['year']; ?>"><?php echo $filtro['year']; ?></option>
+                    <?php }
+            } ?>
                 </select>
             </div>
 
             <div class="campo">
                 <label for="partner">Country:</label>
-                <select name="parter" id="parter">
-                    <option value="1">Venezuela</option>
-                    <option value="2">Brazil</option>
+                <select name="partner" id="partner">
+                <?php $filtros = obtenerPartner();
+
+                if($filtros->num_rows) {
+                    foreach($filtros as $filtro) {?>
+                    <option value="<?php echo $filtro['partner']; ?>"><?php echo $filtro['partner'] ?></option>
+                    <?php }
+            } ?>
                 </select>
             </div>
+            
 
         </div>
     </form>
@@ -55,7 +67,7 @@
                         foreach($importaciones as $importacion) { ?>
                     <tr>
                         <td><?php echo $importacion['product']; ?></td>
-                        <td class="total"><?php echo $importacion['total']; ?></td>
+                        <td id="<?php echo $importacion['year']; ?>" class="total"><?php echo $importacion['total']; ?></td>
                     </tr>
 
                     <?php }
